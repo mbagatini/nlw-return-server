@@ -21,6 +21,18 @@ export class SubmitFeedbackService {
   async execute(request: SubmitFeedbackServiceRequest) {
     const { type, comment, screenshot } = request;
 
+    if (!["BUG", "IDEIA", "OUTRO"].includes(type)) {
+      throw new Error("Feedback type must be BUG, IDEIA or OUTRO");
+    }
+
+    if (!comment) {
+      throw new Error("Comment is required");
+    }
+
+    if (screenshot && !screenshot.startsWith("data:image/png;base64")) {
+      throw new Error("Screenshot must be a base64 encoded PNG");
+    }
+
     await this.feedbackRepository.create({
       type,
       comment,

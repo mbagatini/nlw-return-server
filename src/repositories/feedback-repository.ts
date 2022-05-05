@@ -7,6 +7,16 @@ export interface FeedbackCreateData {
   screenshot?: string;
 }
 
+export interface FeedbackListData {
+  data: {
+    id: string;
+    type: string;
+    comment: string;
+    screenshot: string | null;
+  }[];
+}
+
 export interface FeedbackRepository {
   create(data: FeedbackCreateData): Promise<void>;
+  list(): Promise<FeedbackListData>;
 }

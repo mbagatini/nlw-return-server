@@ -2,7 +2,11 @@
  * Esse arquivo é responsável pela comunicação com o banco de dados somente
  */
 import { prisma } from "../../prisma";
-import { FeedbackCreateData, FeedbackRepository } from "../feedback-repository";
+import {
+  FeedbackCreateData,
+  FeedbackListData,
+  FeedbackRepository,
+} from "../feedback-repository";
 
 export class PrismaFeedbackRepository implements FeedbackRepository {
   async create({
@@ -17,5 +21,10 @@ export class PrismaFeedbackRepository implements FeedbackRepository {
         screenshot,
       },
     });
+  }
+
+  async list(): Promise<FeedbackListData> {
+    const data = await prisma.feedback.findMany();
+    return { data };
   }
 }

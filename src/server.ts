@@ -1,4 +1,5 @@
 import express from "express";
+import { transport } from "./mailtrap";
 import { prisma } from "./prisma";
 
 const app = express();
@@ -19,6 +20,19 @@ app.post("/feedbacks", async (req, res) => {
       comment,
       screenshot,
     },
+  });
+
+  await transport.sendMail({
+    from: "Equipe Feedget <noreply@feedget.com>",
+    to: "Morgs <morganabagatini@gmail.com>",
+    subject: "Envio de feedback",
+    html: [
+      `<div style='font-family: Poppins, sans-serif'>`,
+      `<h3>Agradecemos pelo seu contato!</h3>`,
+      `<p>Tipo de feedback: ${feedback.type}</p>`,
+      `<p>Comentário: ${feedback.comment}</p>`,
+      `</div>`,
+    ].join("\n"),
   });
 
   return res.status(201).json({ data: feedback });

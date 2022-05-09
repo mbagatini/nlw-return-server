@@ -5,18 +5,19 @@ import { SubmitFeedbackService } from "./submit-feedback-service";
 
 // spies - testa se a função foi chamada
 const createFeedbackSpy = jest.fn();
+const listFeedbackSpy = jest.fn();
 const sendMailSpy = jest.fn();
 
 describe("Submit feedback", () => {
   const submitFeedback = new SubmitFeedbackService(
-    { create: createFeedbackSpy },
+    { create: createFeedbackSpy, list: listFeedbackSpy },
     { sendMail: sendMailSpy }
   );
 
   it("should be able to submit a feedback", async () => {
     await expect(
       submitFeedback.execute({
-        type: "OUTRO",
+        type: "OTHER",
         comment: "Essa aplicação é fera",
       })
     ).resolves.not.toThrow();

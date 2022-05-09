@@ -8,7 +8,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://nlw-return-web-eosin.vercel.app",
+      "https://nlw-return-web-impulse.vercel.app",
     ], // all
   })
 );

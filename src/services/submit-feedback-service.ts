@@ -21,8 +21,8 @@ export class SubmitFeedbackService {
   async execute(request: SubmitFeedbackServiceRequest) {
     const { type, comment, screenshot } = request;
 
-    if (!["BUG", "IDEIA", "OUTRO"].includes(type)) {
-      throw new Error("Feedback type must be BUG, IDEIA or OUTRO");
+    if (!["BUG", "IDEA", "OTHER"].includes(type)) {
+      throw new Error("Feedback type must be BUG, IDEA or OTHER");
     }
 
     if (!comment) {

@@ -6,7 +6,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",
+      "https://nlw-return-web-eosin.vercel.app/",
+    ], // all
   })
 );
 
